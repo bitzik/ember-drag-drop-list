@@ -1,28 +1,37 @@
 import Ember from 'ember';
 import layout from '../templates/components/dnd-item';
 
+const {Logger} = Ember;
+
 export default Ember.Component.extend({
-  layout: layout
+  layout: layout,
+  // list: null,
+  actions: {
+    rearrangeList(droppedObject, options) {
+      const list = this.get('list'),
+        targetIdx = list.indexOf(options.target.item),
+        originIdx = list.indexOf(droppedObject);
+      Logger.debug('list -> ', list.length);
+      Logger.debug('from -> ', originIdx, ' to ', targetIdx);
+      Logger.debug('index? ', options.target.index);
+      if(targetIdx < originIdx) {
+        //moving up
+        list.removeObject(droppedObject);
+        list.insertAt(targetIdx, droppedObject);
+      } else if (targetIdx > originIdx){
+        //moving down
+        list.removeObject(droppedObject);
+        list.insertAt(targetIdx, droppedObject);
+      } //else do nothing
+    }
+  }
 });
 
 /*
-could be used like: 
+0 - A                           0 - A  -> move it up                                .
+1 - B                           1 - B                                 .
+2 - C->take C show placeholder  2 - _                                                         .
+3 - D                           3 - D                              .
+4 - E                           4 - E                               .
 
-{{#each blah as | bla |}}
-	{{#dnd-item list=blah item=bla}}
-		{{render your bla as you want }}
-	{{/dnd-item}}
-{{/each}}
-
-or ... 
-
-{{#dnd-list list=blah}}
-	{{each ... example from above}}
-{{/dnd-list}}
-
-ideally it would be something like
-
-{{#dnd-each blah as |bla|}}
-	{{render the bla as you please}}
-{{/dnd-each}}
 */

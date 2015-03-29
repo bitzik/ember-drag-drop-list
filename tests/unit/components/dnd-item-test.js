@@ -19,3 +19,15 @@ test('it renders', function(assert) {
   this.render();
   assert.equal(component._state, 'inDOM');
 });
+
+test('it can move down', function(assert) {
+  assert.expect(3);
+  const component = this.subject({
+    list: [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G'
+    ]
+  });
+  //moving an object should always place it right before the target
+  //which means that we need special case to move the object on the last place
+  
+});

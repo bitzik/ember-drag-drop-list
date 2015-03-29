@@ -1,1 +1,9 @@
-{{yield}}
+{{#draggable-object-target action='rearrangeList' item=item}}
+  {{#draggable-object content=item dragging=dragging}}
+    {{#if dragging}}
+      <div class="dnd-list-item-placeholder">I'm  a placeholder</div>
+    {{else}}
+      {{yield}}
+    {{/if}}
+  {{/draggable-object}}
+{{/draggable-object-target}}

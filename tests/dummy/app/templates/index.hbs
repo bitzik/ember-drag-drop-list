@@ -1,0 +1,8 @@
+<ul class="list-group">
+  {{#each messages as |message index|}}
+    {{#dnd-item list=messages item=message index=index}}
+      {{bs-list-group-item item=message}}
+    {{/dnd-item}}
+  {{/each}}
+
+</ul>
